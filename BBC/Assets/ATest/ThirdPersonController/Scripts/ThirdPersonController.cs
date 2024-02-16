@@ -1,6 +1,7 @@
 ﻿ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -95,6 +96,7 @@ namespace StarterAssets
         private int _animIDSpeed;
         private int _animIDGrounded;
         private int _animIDJump;
+        private int _animIDAim;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
@@ -158,6 +160,7 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
+            Aim();
             Move();
         }
 
@@ -171,6 +174,7 @@ namespace StarterAssets
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");
+            _animIDAim = Animator.StringToHash("Aim");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
@@ -211,6 +215,17 @@ namespace StarterAssets
             // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+        }
+
+        private void Aim()
+        {
+            if (_input.aim)
+            {
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDAim, true);
+                }
+            }
         }
 
         private void Move()
