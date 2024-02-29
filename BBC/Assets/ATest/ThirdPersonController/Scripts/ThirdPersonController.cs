@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -63,6 +64,7 @@ namespace StarterAssets
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
+        public GameObject CinemachineCameraZoomTarget;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -79,6 +81,7 @@ namespace StarterAssets
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
+        private bool _isZoomed;
 
         // player
         private float _speed;
@@ -187,7 +190,7 @@ namespace StarterAssets
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
 
-            Debug.Log(Grounded);
+            //Debug.Log(Grounded);
 
             // update animator if using character
             if (_hasAnimator)
@@ -219,12 +222,13 @@ namespace StarterAssets
 
         private void Aim()
         {
-            if (_input.aim)
-            {
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDAim, true);
-                }
+            if (_input.aim && !_isZoomed){
+                //CinemachineVirtualCamera.In = CinemachineCameraZoomTarget;
+                _isZoomed = true;
+            }
+
+            if (_hasAnimator) {
+                _animator.SetBool(_animIDAim, _input.aim);
             }
         }
 
@@ -287,7 +291,7 @@ namespace StarterAssets
                 RotationSmoothTime);
 
             // rotate to face input direction relative to camera position
-            if (inputDirection.z > 0f )
+            if (inputDirection.z > 0f)
             {
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }

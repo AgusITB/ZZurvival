@@ -232,7 +232,7 @@
                     "name": "",
                     "id": "d2b96f21-ed72-43e7-a40c-7d2d967c24d2",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Aim",
