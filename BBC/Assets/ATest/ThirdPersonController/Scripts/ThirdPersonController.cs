@@ -79,6 +79,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         // cinemachine
+        [SerializeField] private CinemachineVirtualCamera _cmCamera;
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private bool _isZoomed;
@@ -90,6 +91,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        [SerializeField] private Transform _playerHead;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -216,15 +218,22 @@ namespace StarterAssets
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+            if (_isZoomed)
+            {
+                CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+                _cinemachineTargetYaw, 0.0f);
+            }
+            else CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
 
         private void Aim()
         {
             if (_input.aim && !_isZoomed){
-                //CinemachineVirtualCamera.In = CinemachineCameraZoomTarget;
+                _cmCamera.Follow = CinemachineCameraZoomTarget.transform;
+                _cinemachineTargetYaw = CinemachineCameraZoomTarget.transform.rotation.eulerAngles.y;
                 _isZoomed = true;
+                _playerHead.localScale = _playerHead.localScale / 100;
             }
 
             if (_hasAnimator) {
