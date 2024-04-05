@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class Gun : MonoBehaviour
 {
+    // Clase de arma para el arma (y futuras armas)
     [SerializeField]
     protected string gunName;
 
@@ -84,10 +85,9 @@ public class Gun : MonoBehaviour
         }
 
 
-        }
-    public virtual void Shoot() {
-    
     }
+
+    public virtual void Shoot() {}
 
 
     public void StartReload() {

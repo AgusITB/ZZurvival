@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-
+    // "Cruz" de ayuda de apuntado que se agranda según disparas y cambia a rojo si golpeas (en canvas)
     private RectTransform rect;
     public float baseSize = 60f;
     public float recoil;

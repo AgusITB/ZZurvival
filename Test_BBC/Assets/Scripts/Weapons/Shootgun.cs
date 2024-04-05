@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Shootgun : Gun
 {
-  
+    // La intentaré hacer en un futuro jeje  
 }

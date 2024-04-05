@@ -6,6 +6,7 @@ using TMPro;
 
 public class GunInfoUI : MonoBehaviour
 {
+    // Para mostrar info en UI del arma
     public Gun gun;
     public TextMeshProUGUI gunName;
     public TextMeshProUGUI amoInfo;

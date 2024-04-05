@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Planeo cambiarlo a un input system pero murió mi proyecto q tenia input system y lo he rehecho a saco
     [Range(1f, 10f)]
     public float mouseSensitive = 3;
     [Range(-180f, 180f)]
@@ -67,12 +68,9 @@ public class PlayerMovement : MonoBehaviour
         GravitySystem();
         CameraPack();
 
-        // float moveScale = new Vector3(animator.GetFloat("MoveX"), 0f, animator.GetFloat("MoveZ")).magnitude;
-        //controller.Move(new Vector3(moveDirection.x * moveScale, gravity, moveDirection.z * moveScale) * Time.deltaTime);
         controller.Move(new Vector3(moveDirection.x, gravity, moveDirection.z) * Time.deltaTime);
 
     }
-
 
     void Movement() {
 
@@ -188,14 +186,12 @@ public class PlayerMovement : MonoBehaviour
         velocity = Mathf.Clamp(velocity, 0f, 1f);
 
         oldPos = new Vector3(transform.position.x, 0f, transform.position.z);
-        //animator.SetFloat("MoveX", Mathf.Lerp(animator.GetFloat("MoveX"), animMove.x * velocity, Time.deltaTime * 10f));
-        //animator.SetFloat("MoveZ", Mathf.Lerp(animator.GetFloat("MoveZ"), animMove.z * velocity, Time.deltaTime * 10f));
         animator.SetFloat("MoveX", Mathf.Lerp(animator.GetFloat("MoveX"), animMove.x, Time.deltaTime * 20f));
         animator.SetFloat("MoveZ", Mathf.Lerp(animator.GetFloat("MoveZ"), animMove.z, Time.deltaTime * 20f));
         float turnValue = Input.GetAxis("Mouse X") * 3f;
         turnValue = Mathf.Clamp(turnValue, -1f, 1f);
         animator.SetFloat("TurnValue", Mathf.Lerp(animator.GetFloat("TurnValue"), Input.GetAxis("Mouse X") * 2f, Time.deltaTime * 3f));
-        //animator.SetBool("Sprint", Input.GetKey(KeyCode.LeftShift));
+
         if (!isReload)
         {
             RHandRig.weight = Mathf.Lerp(RHandRig.weight, (Input.GetKey(KeyCode.LeftShift) && movement == Vector3.zero) ? 0f : 1f, Time.deltaTime * 10f);
@@ -213,18 +209,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Reload(2.4f / 1.2f));
         }
-
-        /* RaycastHit hit;
-         if (Physics.Raycast(usingGun.shootOut.position, usingGun.shootOut.forward, out hit, 1f))
-         {
-             animator.SetBool("HitWall", true);
-             RHandRig.weight = 0f;
-         }
-         else
-         {
-             animator.SetBool("HitWall", false);
-             RHandRig.weight = 1f;
-         }*/
 
         if (Input.GetKeyDown(KeyCode.Q) && !isReload)
         {

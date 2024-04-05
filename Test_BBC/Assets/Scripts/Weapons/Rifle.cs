@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rifle : Gun
 {
-
+    // Arma rifle, behavior del disparo y sus anims. Perdón por usar tags ;(
     public ParticleSystem shootParticle;
     public ParticleSystem shellParticle;
     public TrailRenderer shootTrial;
@@ -38,7 +38,7 @@ public class Rifle : Gun
         }
         gunInfo.UpdateInfo();
         RaycastHit hit;
-        Quaternion recoilRotation = Quaternion.AngleAxis(Random.RandomRange(-recoil, recoil), transform.up) * Quaternion.AngleAxis(Random.RandomRange(-recoil, recoil), transform.right);
+        Quaternion recoilRotation = Quaternion.AngleAxis(Random.Range(-recoil, recoil), transform.up) * Quaternion.AngleAxis(Random.Range(-recoil, recoil), transform.right);
         bool isHit = Physics.Raycast(shootOut.position, recoilRotation * shootOut.forward * 1000f, out hit);
         if (isHit)
         {

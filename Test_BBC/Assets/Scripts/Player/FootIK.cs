@@ -5,9 +5,8 @@ using UnityEngine.Animations.Rigging;
 
 public class FootIK : MonoBehaviour
 {
+    // Para inverse kinematics (vi un tutorial)
     private Animator animator;
-    //public Transform rightFoot;
-   // public Transform lefFoot;
 
     [Range(0f, 1f)]
     public float rightFootWeight = 1f;

@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class Equipment : MonoBehaviour
 {
+    // Intento de meter más armas (funciona a medias, solo rifle good)
     public enum WeaponType
     {
         Rifle = 0,
@@ -13,7 +14,7 @@ public class Equipment : MonoBehaviour
 
     public WeaponType weaponType = WeaponType.Rifle;
     public Gun rifle;
-    //public MultiAimConstraint rifleRig;
+
     public Vector3 rifleHandOffset;
     public Vector3 rifleHandRotOffset;
 
@@ -35,12 +36,6 @@ public class Equipment : MonoBehaviour
     void Start()
     {
         playerMovement = transform.parent.GetComponent<PlayerMovement>();
-    }
-
-
-    void Update()
-    {
-        
     }
 
     public void ChangeWeapon() {

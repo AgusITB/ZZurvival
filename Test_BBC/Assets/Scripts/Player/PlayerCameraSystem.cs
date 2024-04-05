@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerCameraSystem : MonoBehaviour
 {
-
-
+    // No se porque murió mi cinemachine y no conseguia ponerla bien (tuve q hacer este apaño)
     public float cameraDistance;
 
     public Transform normalPos;
@@ -25,7 +24,7 @@ public class PlayerCameraSystem : MonoBehaviour
     {
         targetPos = Input.GetMouseButton(1) ? aimingPos : normalPos;
         mainCamera.position = Vector3.Lerp(mainCamera.position, targetPos.position, Time.deltaTime * 5f);
-        mainCamera.LookAt(aimCamera.position);
+        mainCamera.LookAt(aimCamera.position); // grande LookAt
 
         RaycastHit rHit;
         if (Physics.Raycast(mainCamera.position, mainCamera.forward, out rHit, 100f))
@@ -39,8 +38,6 @@ public class PlayerCameraSystem : MonoBehaviour
                 aimTransform.position = mainCamera.forward * 100f;
 
             }
-           // aimTransform.position = hit.point;
-           // aimTransform.localPosition = new Vector3(aimTransform.transform.localPosition.x, aimTransform.localPosition.y, Mathf.Clamp(hit.point.z, cameraDystance + 2f, Mathf.Infinity));
 
         }
         else {
