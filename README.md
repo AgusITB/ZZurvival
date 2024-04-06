@@ -1,2 +1,2 @@
 # BBC
-Beer Belly Championship
+Big Boomer Championship
