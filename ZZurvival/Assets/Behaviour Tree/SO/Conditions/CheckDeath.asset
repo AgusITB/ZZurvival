@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ee19f8a809a80438b97f9231185f06, type: 3}
-  m_Name: Follow
+  m_Script: {fileID: 11500000, guid: 7d10f94f3a6302a4abfc0f38667db984, type: 3}
+  m_Name: CheckDeath
   m_EditorClassIdentifier: 

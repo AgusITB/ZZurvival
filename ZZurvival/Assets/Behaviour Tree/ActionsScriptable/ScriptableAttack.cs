@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "ScriptableAttack", menuName =
     "ScriptableObjects2/ScriptableAction/ScriptableAttack", order = 1)]
 public class ScriptableAttack : ScriptableAction
