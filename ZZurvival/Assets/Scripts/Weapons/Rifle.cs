@@ -42,7 +42,12 @@ public class Rifle : Gun
         bool isHit = Physics.Raycast(shootOut.position, recoilRotation * shootOut.forward * 1000f, out hit);
         if (isHit)
         {
-
+            GameObject enemy = hit.collider.gameObject;
+            if (enemy.CompareTag("Enemy"))
+            {
+                //Animator enemyAnimator = enemy.GetComponentInParent<Animator>();
+                //enemyAnimator.SetBool("isDying", true);
+            }
             StartCoroutine(SpawnTrail(trail, hit, isHit));
         }
         else {
