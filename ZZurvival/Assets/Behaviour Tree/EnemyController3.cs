@@ -11,7 +11,6 @@ public class EnemyController3 : StateController2
 {
     public float AttackDistance;
     public float HP;
-    private float nextHurt = 0;
     [SerializeField] private float detection_delay;
 
     CoroutineHandle rayacstCoroutineHandle;
@@ -20,12 +19,6 @@ public class EnemyController3 : StateController2
         StateTransition();
         if (currentState.action != null)
             currentState.action.OnUpdate();
-
-        if (Input.GetKey("space") && Time.time >= nextHurt)
-        {
-            OnHurt(1);
-            nextHurt = Time.time + 0.3f;
-        }
     }
 
     public void OnHurt(float damage)
