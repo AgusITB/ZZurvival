@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ScriptableRun : ScriptableAction
 {
-    private ChaseBehaviour _chaseBehaviour;
-    private EnemyController3 _enemyController;
     public override void OnFinishedState()
     {
         _chaseBehaviour.StopChasing();
@@ -18,6 +16,8 @@ public class ScriptableRun : ScriptableAction
         GameManager.gm.UpdateText("estoy huyendo");
         _chaseBehaviour = sc.GetComponent<ChaseBehaviour>();
         _enemyController = (EnemyController3)sc;
+        _chaseBehaviour.Speed = 4f;
+        _chaseBehaviour.UpdateSpeed();
     }
 
     public override void OnUpdate()

@@ -16,6 +16,10 @@ public class ChaseBehaviour : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }
+    public void UpdateSpeed()
+    {
+        agent.speed = Speed;
+    }
     public void Chase(Transform target, Transform self)
     {
         agent.destination = target.position;

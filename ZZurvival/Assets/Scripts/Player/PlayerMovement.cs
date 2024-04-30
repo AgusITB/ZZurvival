@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movement = Vector3.zero;
     public Animator animator;
 
+
     public Transform cameraPack;
     public Rig RHandRig;
     public Rig WeaponRig; 

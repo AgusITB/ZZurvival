@@ -1,17 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
-using System;
-using Unity.Burst.CompilerServices;
-using UnityEngine.SocialPlatforms;
-using Unity.VisualScripting;
 
 public class EnemyController3 : StateController2
 {
+    [SerializeField] private CapsuleCollider capsule;
     public float AttackDistance;
     public float HP;
     [SerializeField] private float detection_delay;
+    [SerializeField] private Animator enemyAnimator;
 
     CoroutineHandle rayacstCoroutineHandle;
     void Update()
@@ -19,6 +16,25 @@ public class EnemyController3 : StateController2
         StateTransition();
         if (currentState.action != null)
             currentState.action.OnUpdate();
+    }
+
+    public void OnAttack(bool isAttacking)
+    {
+        enemyAnimator.SetBool("isAttacking", isAttacking);
+    }
+    public void OnDeath()
+    {
+        enemyAnimator.SetBool("isDying", true);
+        capsule.enabled = false;
+    }
+    public void OnPatrol(bool isPatroling)
+    {
+        enemyAnimator.SetBool("isFollowing", isPatroling);
+
+    }
+    public void OnHunt(bool isHunting)
+    {
+        enemyAnimator.SetBool("isHunting", isHunting);
     }
 
     public void OnHurt(float damage)
@@ -54,17 +70,17 @@ public class EnemyController3 : StateController2
             {
 
                 RaycastHit hit = hits[i];
-
-                if (hit.collider.gameObject.layer == wallLayerMask)
-                {
-                    Debug.Log(hits[i].collider.name);
-                    break;
-                }
-                else if (hit.collider.gameObject.layer == playerLayerMask)
+                if (hit.collider.gameObject.layer == playerLayerMask)
                 {
                     Debug.Log(hits[i].collider.name);
                     target = player.gameObject;
                 }
+                else if (hit.collider.gameObject.layer == wallLayerMask)
+                {
+                    Debug.Log(hits[i].collider.name);
+                    break;
+                }
+             
             }
         }
     }
