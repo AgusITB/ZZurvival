@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Rifle : Gun
@@ -78,6 +79,7 @@ public class Rifle : Gun
                 case "Enemy":
                     holePrefab = shootHoles[1];
                     crosshair.HitEnemy();
+                    hit.transform.GetComponent<EnemyController3>().OnHurt(1f);
                     break;
                 case "InvisibleWall":
                     break;
