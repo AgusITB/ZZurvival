@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class ChaseBehaviour : MonoBehaviour
 {
     public float Speed;
-    private Rigidbody _rb;
 
     [SerializeField] private NavMeshAgent agent;
 
@@ -13,7 +12,6 @@ public class ChaseBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }
     public void UpdateSpeed()
@@ -26,11 +24,16 @@ public class ChaseBehaviour : MonoBehaviour
     }
     public void Run(Transform target, Transform self)
     {
-        //_rb.velocity = (target.position - self.position).normalized * -Speed;
+      agent.destination = (target.position - self.position).normalized * -Speed;
     }
 
+    public void StopRunning()
+    {
+        agent.isStopped = true;
+
+    }
     public void StopChasing()
     {
-        //_rb.velocity = Vector2.zero;
+       
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using System.Runtime.Versioning;
 
 public class EnemyController3 : StateController2
 {
@@ -9,6 +10,7 @@ public class EnemyController3 : StateController2
     public float HP;
     [SerializeField] private float detection_delay;
     [SerializeField] private Animator enemyAnimator;
+
 
     CoroutineHandle rayacstCoroutineHandle;
     void Update()
@@ -22,9 +24,14 @@ public class EnemyController3 : StateController2
     {
         enemyAnimator.SetBool("isAttacking", isAttacking);
     }
+    public void OnEscape(bool isEscaping)
+    {
+        enemyAnimator.SetBool("isEscaping", isEscaping);
+    }
     public void OnDeath()
     {
         enemyAnimator.SetBool("isDying", true);
+        enemyAnimator.SetBool("isFollowing", false);
         capsule.enabled = false;
     }
     public void OnPatrol(bool isPatroling)
@@ -72,12 +79,11 @@ public class EnemyController3 : StateController2
                 RaycastHit hit = hits[i];
                 if (hit.collider.gameObject.layer == playerLayerMask)
                 {
-                    Debug.Log(hits[i].collider.name);
                     target = player.gameObject;
+                    this.player = target;
                 }
                 else if (hit.collider.gameObject.layer == wallLayerMask)
                 {
-                    Debug.Log(hits[i].collider.name);
                     break;
                 }
              

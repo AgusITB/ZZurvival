@@ -1,9 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StateController2 : MonoBehaviour
 {
     public NodeBehaviourTree currentState;
     public GameObject target = null;
+    public GameObject player = null;
     //protected NodeBehaviourTree stateToPlay = null;
     public void StateTransition()
     {

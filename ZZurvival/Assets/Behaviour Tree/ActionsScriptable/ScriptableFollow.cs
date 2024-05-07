@@ -22,6 +22,6 @@ public class ScriptableFollow : ScriptableAction
 
     public override void OnUpdate()
     {
-        _chaseBehaviour.Chase(_enemyController.target.transform, sc.transform);
+        _chaseBehaviour.Chase(_enemyController.player.transform, sc.transform);
     }
 }
