@@ -1,0 +1,26 @@
+using UnityEngine;
+[CreateAssetMenu(fileName = "ScriptableDie", menuName = "ScriptableObjects2/ScriptableAction/ScriptableDie", order = 2)]
+
+public class ScriptableDie : ScriptableAction
+{
+    public override void OnFinishedState()
+    {
+        GameManager.gm.UpdateText("me mori");
+
+    }
+
+    public override void OnSetState(StateController2 sc)
+    {
+        base.OnSetState(sc);
+        GameManager.gm.UpdateText("me estoy muriendo");
+        _chaseBehaviour = sc.GetComponent<ChaseBehaviour>();
+        _enemyController = (EnemyController3)sc;
+        _enemyController.OnDeath();
+
+    }
+
+    public override void OnUpdate()
+    {
+        GameManager.gm.UpdateText("toma mis monedas");
+    }
+}
